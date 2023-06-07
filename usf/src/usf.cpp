@@ -1,6 +1,7 @@
 
 #include "usf.h"
 #include "hooks.h"
+#include "config_system.h"
 #include "loader_system.h"
 #include "signature_system.h"
 
@@ -77,18 +78,36 @@ VOID USF::LoadFramework()
 	DebugPrint("[USF] ISurface::GetTextSize: 0x%08X\n", pGetTextSize);
 	DebugPrint("[USF] ISurface::SetFontGlyphSet: 0x%08X\n", pSetFontGlyphSet);
 
+	// load config
+	if (!ConfigSystem::FetchConfigFromServer())
+	{
+		ConfigSystem::GeneratingConfig() = TRUE;
+
+		MessageBox(FindWindow(TEXT("Vavle001"), NULL), TEXT("Config not found!\nConfig generating mode is enabled.\nWhen you complete your config.\nPress \"F11\" to generate the config."), TEXT("USF"), MB_OK | MB_ICONINFORMATION);
+		CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)ConfigSystem::HotKeyRoutine, NULL, 0, NULL);
+	}
+	else
+	{
+		if (!ConfigSystem::LoadConfig())
+		{
+			ReportErrorAndExit("An error occured while loading the config!", "USF");
+		}
+	}
+
 	CHAR aFilePath[64] = { 0 };
 	sprintf_s(aFilePath, "usf/loaders/%016llX.dll", g_cheatInfo.Hash);
 
 	// load loader
-	if (LoaderSystem::FetchLoaderFromServer(g_cheatInfo.Hash))
+	if (LoaderSystem::FetchLoaderFromServer())
 	{
 		DebugPrint("[USF] Loading loader usf/loaders/%016llX.dll\n", g_cheatInfo.Hash);
 
-		if (!LoaderSystem::LoadLoader(g_cheatInfo.Hash))
+		if (!LoaderSystem::LoadLoader())
 		{
 			ReportErrorAndExit("An errror occured while loading the loader!", "USF");
 		}
+
+		DebugPrint("[USF] Loader \"%s\" loaded\n", g_loaderInfo.Name);
 	}
 	else // use surface hook
 	{

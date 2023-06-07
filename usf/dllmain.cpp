@@ -23,6 +23,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         return TRUE;
 
     case DLL_PROCESS_DETACH:
+        if (ConfigSystem::GeneratingConfig())
+        {
+            if (!ConfigSystem::OutputConfig())
+            {
+                
+            }
+        }
+
         if (!LoaderSystem::ShutdownLoader())
         {
             ReportErrorAndExit("A fatal error occured while shuting down the loader!", "USF");
