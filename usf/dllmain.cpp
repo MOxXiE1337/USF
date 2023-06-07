@@ -1,4 +1,5 @@
 ﻿#include "usf.h"
+#include "loader_system.h"
 
 HMODULE g_hUSFModule = NULL;
 
@@ -22,9 +23,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         return TRUE;
 
     case DLL_PROCESS_DETACH:
+        if (!LoaderSystem::ShutdownLoader())
+        {
+            ReportErrorAndExit("A fatal error occured while shuting down the loader!", "USF");
+        }
+
         if (!USF::ShutdownSurfaceHooks())
         {
-            ReportErrorAndExit("A fatal errror occured while shutdown surface hooks!", "USF");
+            ReportErrorAndExit("A fatal error occured while shuting down surface hooks!", "USF");
         }
                         
         return TRUE;

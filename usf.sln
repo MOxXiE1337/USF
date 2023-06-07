@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "usf", "usf\usf.vcxproj", "{FFF76F4A-5D87-4CEF-800D-65C9D157045F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "airflow_loader", "airflow_loader\airflow_loader.vcxproj", "{534D597B-35CF-4085-9F04-ED56D1D43664}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{FFF76F4A-5D87-4CEF-800D-65C9D157045F}.Release|x64.Build.0 = Release|x64
 		{FFF76F4A-5D87-4CEF-800D-65C9D157045F}.Release|x86.ActiveCfg = Release|Win32
 		{FFF76F4A-5D87-4CEF-800D-65C9D157045F}.Release|x86.Build.0 = Release|Win32
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Debug|x64.ActiveCfg = Debug|x64
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Debug|x64.Build.0 = Debug|x64
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Debug|x86.ActiveCfg = Debug|Win32
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Debug|x86.Build.0 = Debug|Win32
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Release|x64.ActiveCfg = Release|x64
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Release|x64.Build.0 = Release|x64
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Release|x86.ActiveCfg = Release|Win32
+		{534D597B-35CF-4085-9F04-ED56D1D43664}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

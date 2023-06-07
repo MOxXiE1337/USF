@@ -71,20 +71,6 @@ ULONG_PTR SignatureSystem::ScanSignature(const std::string& strLable)
 	return g_labeledSignatures[strLable].second;
 }
 
-ULONG_PTR SignatureSystem::ScanFuzzySignature(const std::string& strLable)
-{
-	for (auto& i : g_labeledSignatures)
-	{
-		if (i.first.substr(0, strLable.size()) == strLable)
-		{
-			ULONG_PTR uResult = ScanSignature(i.first);
-			if (uResult != 0x0)
-				return uResult;
-		}
-	}
-	return 0x0;
-}
-
 ULONG_PTR SignatureSystem::ScanRawSignature(ULONG_PTR pStartAddress, SIZE_T nSize, const std::string& strSignature)
 {
 	PBYTE pScanStart, pScanEnd;

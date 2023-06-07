@@ -83,9 +83,11 @@ VOID USF::LoadFramework()
 	// load loader
 	if (LoaderSystem::FetchLoaderFromServer(g_cheatInfo.Hash))
 	{
+		DebugPrint("[USF] Loading loader usf/loaders/%016llX.dll\n", g_cheatInfo.Hash);
+
 		if (!LoaderSystem::LoadLoader(g_cheatInfo.Hash))
 		{
-			ReportErrorAndExit("An errror occured while loading loader!", "USF");
+			ReportErrorAndExit("An errror occured while loading the loader!", "USF");
 		}
 	}
 	else // use surface hook
