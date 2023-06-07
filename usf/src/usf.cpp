@@ -42,19 +42,17 @@ VOID USF::InitFramework()
 			ReportErrorAndExit("An errror occured while initializing VirtualAlloc hook!", "USF");
 		}
 	}
-	else
-	{
-		// init copy trap
-		if (!Cheat::InitCopyTrap())
-		{
-			ReportErrorAndExit("An errror occured while initializing copy trap!", "USF");
-		}
 
-		// bypass virtual query (because we will set the last byte to PAGE_GUARD, the VirtualQuery will return the wrong result
-		if (!Cheat::InitVirtualQueryHook())
-		{
-			ReportErrorAndExit("An errror occured while initializing VirtualQuery hook!", "USF");
-		}
+	
+	// init copy trap
+	if (!Cheat::InitCopyTrap())
+	{
+		ReportErrorAndExit("An errror occured while initializing copy trap!", "USF");
+	}
+	// bypass virtual query (because we will set the last byte to PAGE_GUARD, the VirtualQuery will return the wrong result
+	if (!Cheat::InitVirtualQueryHook())
+	{
+		ReportErrorAndExit("An errror occured while initializing VirtualQuery hook!", "USF");
 	}
 
 	MessageBox(FindWindow(TEXT("Vavle001"), NULL), TEXT("The framework has been initialized successfully, please inject your cheat."), TEXT("USF"), MB_OK | MB_ICONINFORMATION);
